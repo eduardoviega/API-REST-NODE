@@ -6,6 +6,8 @@ usuarioControlador.create = function(req, res){
     usuario.create({
         idUsuario: req.body.idUsuario,
         nome: req.body.nome,
+        idade: req.body.idade,
+        cpf: req.body.cpf,
         email: req.body.email,
         senha: req.body.senha,
         tipoUsuario: req.body.tipoUsuario
@@ -14,6 +16,23 @@ usuarioControlador.create = function(req, res){
     }).catch((erro) => {
         res.status(500).send("Erro no cadastro do usuario: "+erro)    
     })
+}
+
+usuarioControlador.findOne = function (req, res) {
+    usuario.findOne({
+        raw: true,
+        where: {
+            idUsuario: req.params.id
+        }
+    }).then(
+        function (dados) {
+            res.status(200).send(dados)
+        }
+    ).catch(
+        function (erro) {
+            res.status(500).send(`Erro ao buscar pelo usuario id ${req.params.id} informado: ` + erro)
+        }
+    )
 }
 
 usuarioControlador.findAll = function(req, res){
@@ -29,6 +48,8 @@ usuarioControlador.findAll = function(req, res){
 usuarioControlador.update = function(req, res){
     usuario.update({
         nome: req.body.nome,
+        idade: req.body.idade,
+        cpf: req.body.cpf,
         email: req.body.email,
         senha: req.body.senha,
     },{

@@ -1,8 +1,8 @@
 var sequelize = require("sequelize")
 var banco = require("./../configs/bancoConfig")
 
-var usuario = banco.define('usuario', {
-    idUsuario: {
+var projeto = banco.define('projeto', {
+    idProjeto: {
         type: sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -12,31 +12,23 @@ var usuario = banco.define('usuario', {
         type: sequelize.STRING,
         allowNull: false,
     },
-    idade: {
-        type: sequelize.INTEGER,
-        allowNull: false,
-    },
-    cpf: {
-        type: sequelize.INTEGER,
-        allowNull: false,
-    },
-    email: {
+    descricao: {
         type: sequelize.STRING,
         allowNull: false,
     },
-    senha: {
-        type: sequelize.STRING,
-        allowNull: false,
-    },
-    tipoUsuario: {
+    dataInicio: {
         type: sequelize.INTEGER,
         allowNull: false,
-    }
+    },
+    dataFim: {
+        type: sequelize.INTEGER,
+        allowNull: false,
+    },
 }, {
     freezeTableName: true,
     timestamps: false
 });
 
-usuario.sync()
+projeto.sync()
 
-module.exports = usuario
+module.exports = projeto
