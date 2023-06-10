@@ -54,31 +54,30 @@ candidaturaController.destroy = function (req, res) {
     })
 }
 
-candidaturaController.candidatosSelecionados = function (req, res) {
-    candidatura.findAll({
-        raw: true,
-        where: {
-            idProjeto: req.params.id
-        }
-    }).then((candidaturasDoProjeto) => {
-        var listUsuario = []
-        candidaturasDoProjeto.forEach(cand => {
-            usuario.findOne({
+candidaturaController.candidatosSelecionados = async function (req, res) {
+    try {
+        const candidaturasDoProjeto = await candidatura.findAll({
+            raw: true,
+            where: {
+                idProjeto: req.params.id
+            }
+        });
+
+        const listUsuario = await Promise.all(candidaturasDoProjeto.map(async (cand) => {
+            const usuarioCand = await usuario.findOne({
                 raw: true,
                 where: {
                     idUsuario: cand.idUsuario
                 }
-            }).then((usuarioCand) => {
-                listUsuario = [...listUsuario, usuarioCand]
-                console.log(listUsuario)
-            }).catch((erro) => {
-                res.status(500).send(`Erro ao buscar pelo usuario id ${req.params.id} informado: ` + erro)
-            })
-        });
-        res.status(200).send(listUsuario)
-    }).catch((erro) => {
-        res.status(500).send(`Erro ao buscar as apresentações: ` + erro)
-    })
+            });
+            return { nome: usuarioCand.nome };
+        }));
+
+        res.status(200).send(listUsuario);
+    } catch (erro) {
+        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+    }
 }
+
 
 module.exports = candidaturaController

@@ -19,6 +19,7 @@ rotas.post("/selecionaCandidato/:id", )
 
 rotas.post("/candidatar/:idprojeto/:idusuario", candidaturaController.createCandidatura)
 rotas.get("/candidatosSelecionados/:id", candidaturaController.candidatosSelecionados);
+rotas.delete("/deletarCandidatura/:id", candidaturaController.destroy);
 
 
 module.exports = rotas

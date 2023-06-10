@@ -24,6 +24,10 @@ var projeto = banco.define('projeto', {
         type: sequelize.INTEGER,
         allowNull: false,
     },
+    popularidade: {
+        type: sequelize.INTEGER,
+        allowNull: false,
+    },
 }, {
     freezeTableName: true,
     timestamps: false
