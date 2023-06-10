@@ -18,15 +18,32 @@ projetoControlador.create = function (req, res) {
     })
 }
 
-projetoControlador.findAll = function (req, res) {
-    projeto.findAll({
-        raw: true
-    }).then((dados) => {
-        res.status(200).send(dados)
-    }).catch((erro) => {
-        res.status(500).send(`Erro ao buscar os projetos: ` + erro)
-    })
+projetoControlador.findAll = async function (req, res) {
+    try {
+        const projetos = await projeto.findAll({
+            raw: true
+        });
+
+        const promises = projetos.map(async (proj) => {
+            const candidaturas = await candidatura.findAll({
+                raw: true,
+                where: {
+                    idProjeto: proj.idProjeto,
+                    aprovado: true
+                }
+            });
+            proj.popularidade = candidaturas.length;
+            console.log(proj);
+        });
+
+        await Promise.all(promises);
+
+        res.status(200).send(projetos);
+    } catch (erro) {
+        res.status(500).send(`Erro ao buscar os projetos: ` + erro);
+    }
 }
+
 
 projetoControlador.update = function (req, res) {
     projeto.update({
