@@ -43,7 +43,6 @@ projetoControlador.findAll = async function (req, res) {
     }
 }
 
-
 projetoControlador.update = function (req, res) {
     projeto.update({
         nome: req.body.nome,

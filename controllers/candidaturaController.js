@@ -59,7 +59,8 @@ candidaturaController.candidatosSelecionados = async function (req, res) {
         const candidaturasDoProjeto = await candidatura.findAll({
             raw: true,
             where: {
-                idProjeto: req.params.id
+                idProjeto: req.params.id,
+                aprovado: true
             }
         });
 
@@ -67,7 +68,7 @@ candidaturaController.candidatosSelecionados = async function (req, res) {
             const usuarioCand = await usuario.findOne({
                 raw: true,
                 where: {
-                    idUsuario: cand.idUsuario
+                    idUsuario: cand.idUsuario,
                 }
             });
             return { nome: usuarioCand.nome };
@@ -79,5 +80,49 @@ candidaturaController.candidatosSelecionados = async function (req, res) {
     }
 }
 
+candidaturaController.candidatosInteressados = async function (req, res) {
+    try {
+        const candidaturasDoProjeto = await candidatura.findAll({
+            raw: true,
+            where: {
+                idProjeto: req.params.id,
+                aprovado: false
+            }
+        });
+
+        const listUsuario = await Promise.all(candidaturasDoProjeto.map(async (cand) => {
+            const usuarioCand = await usuario.findOne({
+                raw: true,
+                where: {
+                    idUsuario: cand.idUsuario,
+                }
+            });
+            return { nome: usuarioCand.nome };
+        }));
+
+        res.status(200).send(listUsuario);
+    } catch (erro) {
+        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+    }
+}
+
+candidaturaController.selecionaCandidato = async function (req, res) {
+    try {
+        candidatura.update({
+            aprovado: true
+        }, {
+            where: {
+                idProjeto: req.params.idprojeto,
+                idUsuario: req.params.idusuario
+            }
+        }).then(() => {
+            res.sendStatus(200)
+        }).catch((erro) => {
+            res.status(500).send(`Erro ao atualizar a candidatura: ` + erro)
+        });
+    } catch (erro) {
+        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+    }
+}
 
 module.exports = candidaturaController

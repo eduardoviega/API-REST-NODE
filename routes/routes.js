@@ -16,8 +16,8 @@ rotas.post("/cadastrarProjeto", responsavel, projectController.create)
 rotas.put("/editarProjeto/:id", responsavel, projectController.update);
 rotas.delete("/deletarProjeto/:id", responsavel, projectController.destroy);
 rotas.get("/projetos", responsavel, projectController.findAll);
-rotas.get("/candidatosInteressados", responsavel, );
-rotas.post("/selecionaCandidato/:id", responsavel, );
+rotas.get("/candidatosInteressados/:id", responsavel, candidaturaController.candidatosInteressados);
+rotas.post("/selecionaCandidato/:idprojeto/:idusuario", responsavel, candidaturaController.selecionaCandidato);
 
 rotas.post("/candidatar/:idprojeto/:idusuario", candidato, candidaturaController.createCandidatura);
 rotas.get("/candidatosSelecionados/:id", candidato, candidaturaController.candidatosSelecionados);
