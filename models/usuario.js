@@ -22,6 +22,7 @@ var usuario = banco.define('usuario', {
     },
     email: {
         type: sequelize.STRING,
+        unique: true,
         allowNull: false,
     },
     senha: {

@@ -2,24 +2,37 @@ var express = require('express')
 var userController = require('../controllers/usuarioController')
 var projectController = require('../controllers/projetoController')
 var candidaturaController = require('../controllers/candidaturaController')
+const passport = require("passport");
+const {candidato, responsavel, admin} = require("../helpers/acesso")
 
 var rotas = express.Router()
 
-rotas.post("/cadastrarPessoa", userController.create);
-rotas.put("/editarPessoa/:id", userController.update);
-rotas.delete("/deletarPessoa/:id", userController.destroy);
-rotas.get("/candidatos", userController.findAll);
+rotas.post("/cadastrarPessoa", admin, userController.create);
+rotas.put("/editarPessoa/:id", admin, userController.update);
+rotas.delete("/deletarPessoa/:id", admin, userController.destroy);
+rotas.get("/candidatos", admin, userController.findAll);
 
-rotas.post("/cadastrarProjeto", projectController.create)
-rotas.put("/editarProjeto/:id", projectController.update);
-rotas.delete("/deletarProjeto/:id", projectController.destroy);
-rotas.get("/projetos", projectController.findAll);
-rotas.get("/candidatosInteressados", );
-rotas.post("/selecionaCandidato/:id", )
+rotas.post("/cadastrarProjeto", responsavel, projectController.create)
+rotas.put("/editarProjeto/:id", responsavel, projectController.update);
+rotas.delete("/deletarProjeto/:id", responsavel, projectController.destroy);
+rotas.get("/projetos", responsavel, projectController.findAll);
+rotas.get("/candidatosInteressados", responsavel, );
+rotas.post("/selecionaCandidato/:id", responsavel, );
 
-rotas.post("/candidatar/:idprojeto/:idusuario", candidaturaController.createCandidatura)
-rotas.get("/candidatosSelecionados/:id", candidaturaController.candidatosSelecionados);
-rotas.delete("/deletarCandidatura/:id", candidaturaController.destroy);
+rotas.post("/candidatar/:idprojeto/:idusuario", candidato, candidaturaController.createCandidatura);
+rotas.get("/candidatosSelecionados/:id", candidato, candidaturaController.candidatosSelecionados);
+rotas.delete("/deletarCandidatura/:id", candidato, candidaturaController.destroy);
 
+rotas.post("/logar", (req,res,next) => {
+    passport.authenticate("local", {
+    })(req,res,next)
+})
+
+rotas.get("/logout", (req,res) => {
+    req.logout(req.user, erro => {
+        if(erro) return next(erro);
+        res.sendStatus(200)
+    })
+})
 
 module.exports = rotas

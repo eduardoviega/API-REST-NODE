@@ -33,7 +33,6 @@ projetoControlador.findAll = async function (req, res) {
                 }
             });
             proj.popularidade = candidaturas.length;
-            console.log(proj);
         });
 
         await Promise.all(promises);
