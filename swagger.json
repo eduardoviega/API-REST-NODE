@@ -1,0 +1,208 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API-Projetos",
+        "description": "Essa API fornece recursos para persistência de projetos em um banco de dados",
+        "contact": {
+            "email": "juliacardozo@utfpr.edu.br"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/cadastrarPessoa": {
+            "post": {
+                "summary": "Rota para inserir o cadastro de uma pessoa para usuários admin",
+                "responses": {
+                    "200": {
+                        
+                    },
+                    "500": {
+                        "description": "Erro no cadastro do usuario: + erro"
+                    }
+                }
+            }
+        },
+        "/editarPessoa/:id": {
+            "put": {
+                "summary": "Rota para inserir o cadastro de uma pessoa para usuários admin",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao atualizar o usuario: + erro"
+                    }
+                }
+            }
+        },
+        "/deletarPessoa/:id": {
+            "delete": {
+                "summary": "Rota para deletar o cadastro de uma pessoa para usuários admin",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao remover o usuario: + erro"
+                    }
+                }
+            }
+        },
+        "/candidatos": {
+            "get": {
+                "summary": "Rota para listar os usuários cadastrados para usuários admin",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao buscar os usuários: + erro"
+                    }
+                }
+            }
+        },
+        "/cadastrarProjeto": {
+            "post": {
+                "summary": "Rota para cadastrar projeto para usuários responsável",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro no cadastro do Projeto: + erro"
+                    }
+                }
+            }
+        },
+        "/editarProjeto": {
+            "post": {
+                "summary": "Rota para editar projeto para usuários responsável",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao atualizar o Projeto: + erro"
+                    }
+                }
+            }
+        },
+        "/deletarProjeto/:id": {
+            "delete": {
+                "summary": "Rota para excluir um projeto",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao remover o projeto: + erro"
+                    }
+                }
+            }
+        },
+        "/projetos": {
+            "get": {
+                "summary": "Rota para listar todos os projetos e suas popularidades",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao buscar os projetos: + erro"
+                    }
+                }
+            }
+        },
+        "/candidatosInteressados/:id": {
+            "get": {
+                "summary": "Rota para listar os candidatos que se interessaram em um projeto",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao buscar as os candidatos interessados: + erro"
+                    }
+                }
+            }
+        },
+        "/selecionaCandidato/:idprojeto/:idusuario": {
+            "post": {
+                "summary": "Rota para selecionar um candidato interessado para participar de um projeto",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao selecionar candidato: + erro"
+                    }
+                }
+            }
+        },
+        "/candidatar/:idprojeto/:idusuario": {
+            "post": {
+                "summary": "Rota para se candidadar para um projeto",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro no cadastro da candidatura: + erro"
+                    }
+                }
+            }
+        },
+        "/candidatosSelecionados/:id": {
+            "get": {
+                "summary": "Rota para listar os candidatos selecionados para um projeto",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao buscar as candidatos selecionados: + erro"
+                    }
+                }
+            }
+        },
+        "/deletarCandidatura/:id": {
+            "delete": {
+                "summary": "Rota para excluir uma candidatura de uma pessoa",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "Erro ao remover a candidatura: + erro"
+                    }
+                }
+            }
+        },
+        "/logar": {
+            "post": {
+                "summary": "Rota para fazer login",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "summary": "Rota para fazer logout",
+                "responses": {
+                    "200": {
+
+                    },
+                    "500": {
+                        "description": "erro"
+                    }
+                }
+            }
+        }
+    }
+}

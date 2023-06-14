@@ -76,7 +76,7 @@ candidaturaController.candidatosSelecionados = async function (req, res) {
 
         res.status(200).send(listUsuario);
     } catch (erro) {
-        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+        res.status(500).send(`Erro ao buscar as candidatos selecionados: ` + erro);
     }
 }
 
@@ -102,7 +102,7 @@ candidaturaController.candidatosInteressados = async function (req, res) {
 
         res.status(200).send(listUsuario);
     } catch (erro) {
-        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+        res.status(500).send(`Erro ao buscar as os candidatos interessados: ` + erro);
     }
 }
 
@@ -121,7 +121,7 @@ candidaturaController.selecionaCandidato = async function (req, res) {
             res.status(500).send(`Erro ao atualizar a candidatura: ` + erro)
         });
     } catch (erro) {
-        res.status(500).send(`Erro ao buscar as apresentações: ` + erro);
+        res.status(500).send(`Erro ao selecionar candidato: ` + erro);
     }
 }
 
